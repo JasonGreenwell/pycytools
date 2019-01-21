@@ -16,7 +16,7 @@ class Monitor:
         try:
             print(f"Proto: {self.proto_lookup(packet[IP].proto)} | Source: {packet[IP].src} --> Dest: {packet[IP].dst} "
                   f"({self.get_location(packet[IP].dst)})")
-        except IndexError as ie:
+        except IndexError:
             pass
 
     @staticmethod
@@ -36,8 +36,6 @@ class Monitor:
             return f"{dict['city']}, {dict['region']} , {dict['country_name']}"
         except KeyError as k:
             print(k)
-        except Exception as e:
-            print(e)
 
 
 if __name__ == "__main__":
