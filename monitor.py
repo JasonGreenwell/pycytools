@@ -21,7 +21,7 @@ class Monitor:
 
     @staticmethod
     def proto_lookup(number):
-        conn = sqlite3.connect("db")
+        conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         lookup = f"SELECT kw FROM protocols WHERE num = '{number}'"
         protocol = cur.execute(lookup)
