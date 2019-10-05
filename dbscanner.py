@@ -21,12 +21,12 @@ class SQLite3:
 
     def scan_directory(self, path):
         try:
-            with os.scandir(path=path) as scanner:
-                for file in scanner:
-                    if file.is_dir():
+            scanner =  os.scandir(path=path)
+            for file in scanner:
+                if file.is_dir():
                         self.scan_directory(os.path.realpath(file))
-                    elif file.is_file():
-                        self.check(file)
+                elif file.is_file():
+                    self.check(file)
         except FileNotFoundError as e:
             pass
         except PermissionError as e:
@@ -34,10 +34,10 @@ class SQLite3:
 
     def check(self, file):
         try:
-            with open(file, 'rb') as fd:
-                header = fd.read(100)
-                if 'SQLite' in str(header) and os.path.realpath(file) is not os.path.realpath(os.curdir):
-                    self.connect(file)
+            fd = open(file, 'rb')
+            header = fd.read(100)
+            if 'SQLite' in str(header) and os.path.realpath(file) is not os.path.realpath(os.curdir):
+                self.connect(file)
         except PermissionError as e:
             pass
         except OSError as e:
@@ -87,3 +87,5 @@ class MySQL:
     # TODO: Build a class for MySQL
     def __init__(self):
         pass
+
+SQLite3("gcloud")
