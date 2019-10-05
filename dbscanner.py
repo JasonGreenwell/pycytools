@@ -21,10 +21,10 @@ class SQLite3:
 
     def scan_directory(self, path):
         try:
-            scanner =  os.scandir(path=path)
+            scanner = os.scandir(path=path)
             for file in scanner:
                 if file.is_dir():
-                        self.scan_directory(os.path.realpath(file))
+                    self.scan_directory(os.path.realpath(file))
                 elif file.is_file():
                     self.check(file)
         except FileNotFoundError as e:
@@ -54,10 +54,8 @@ class SQLite3:
                     tables_list.append(name)
         except sqlite3.OperationalError as oe:
             pass
-            # print("\t\t " + str(oe))
         except sqlite3.DatabaseError as de:
             pass
-            # print("\t\t " + str(de))
         finally:
             self.save(file, os.path.realpath(file), tables_list)
 
@@ -83,9 +81,7 @@ class SQLite3:
             print(e)
 
 
-class MySQL:
-    # TODO: Build a class for MySQL
-    def __init__(self):
-        pass
-
-SQLite3("gcloud")
+if __name__ == "__main__":
+    dbname = input("Enter DB Name: ")
+    startLoc = input("Enter start location (default is root): ")
+    SQLite3(dbname, startLoc)
