@@ -9,4 +9,3 @@ computer_name = "target_computer_name"
 print(get_defender_scan_results(computer_name))
 
 #TODO
-
